@@ -81,6 +81,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         btnSalir.setPreferredSize(tamaño);
         btnSalir.setMaximumSize(tamaño);
+        //xd
     }
 
     /**
