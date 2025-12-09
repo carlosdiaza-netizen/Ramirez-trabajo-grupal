@@ -87,7 +87,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
         
         //botones de panel modulo
-        Dimension tamañoBoton = new Dimension(280, 50);
+        Dimension tamañoBoton = new Dimension(180, 50);
         btnCliente.setPreferredSize(tamañoBoton);
         btnCliente.setMinimumSize(tamañoBoton);
         btnCliente.setMaximumSize(tamañoBoton);
@@ -95,6 +95,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnCliente.setIcon(new javax.swing.ImageIcon("iconos/cliente.png"));
         btnCliente.setText("Datos Cliente");
         btnCliente.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        
+        
+        btnMetodopago.setPreferredSize(tamañoBoton);
+        btnMetodopago.setMinimumSize(tamañoBoton);
+        btnMetodopago.setMaximumSize(tamañoBoton);
+        
+        btnMetodopago.setIcon(new javax.swing.ImageIcon("iconos/metodopago.png"));
+        btnMetodopago.setText("Metodo de pago");
+        btnMetodopago.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        
+        
+        btnProgramarenvio.setPreferredSize(tamañoBoton);
+        btnProgramarenvio.setMinimumSize(tamañoBoton);
+        btnProgramarenvio.setMaximumSize(tamañoBoton);
+        
+        btnProgramarenvio.setIcon(new javax.swing.ImageIcon("iconos/programarenvio.png"));
+        btnProgramarenvio.setText("Programar envios");
+        btnProgramarenvio.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
     }
 
     /**
@@ -113,8 +131,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnCliente = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnMetodopago = new javax.swing.JButton();
+        btnProgramarenvio = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuInicio = new javax.swing.JMenu();
         MenuSobre = new javax.swing.JMenu();
@@ -148,28 +166,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Gestionar envios");
 
-        jButton2.setText("jButton2");
-
-        jButton3.setText("jButton3");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(85, 85, 85)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnMetodopago, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(btnCliente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnProgramarenvio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+                .addGap(60, 60, 60)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,11 +189,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addComponent(btnMetodopago, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnProgramarenvio, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
 
         MenuInicio.setText("Inicio");
@@ -212,8 +223,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(537, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -267,10 +278,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuSobre;
     private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnMetodopago;
     private javax.swing.JButton btnNuevo;
+    private javax.swing.JButton btnProgramarenvio;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
