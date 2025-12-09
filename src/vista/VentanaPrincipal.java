@@ -21,6 +21,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+        
+        pnlContenido.setLayout(new java.awt.BorderLayout());
+        
         MenuInicio.setIcon(new javax.swing.ImageIcon("iconos/inicio.png"));
         MenuSobre.setIcon(new javax.swing.ImageIcon("iconos/sobrenosotros.png"));
         MenuNovedades.setIcon(new javax.swing.ImageIcon("iconos/novedades.png"));
@@ -113,7 +116,40 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnProgramarenvio.setIcon(new javax.swing.ImageIcon("iconos/programarenvio.png"));
         btnProgramarenvio.setText("Programar envios");
         btnProgramarenvio.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        
+        
+        //Se  configura la ventana principal para permitir navegar con los paneles
+        setLocationRelativeTo(null);
+         setDefaultCloseOperation(EXIT_ON_CLOSE);
+         setTitle("Sistema de Gestión de Biblioteca");
+         setSize(1000, 700);
+        // cargar panel de libros por defecto
+        cargarPanel(new VentanaDatosCliente());
     }
+    
+    
+    //se creara la funcion cargaPanel
+    private void cargarPanel(javax.swing.JPanel panel) {
+    try {
+        System.out.println("Intentando cargar panel: " + panel.getClass().getName());
+        
+        pnlContenido.removeAll();
+        pnlContenido.add(panel, java.awt.BorderLayout.CENTER);
+        pnlContenido.revalidate();
+        pnlContenido.repaint();    
+        System.out.println("✓ Panel cargado correctamente");
+    } catch (Exception e) {
+        System.err.println("✗ Error al cargar panel: " + e.getMessage());
+        e.printStackTrace();
+    }
+    
+    
+}
+    
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -133,6 +169,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnCliente = new javax.swing.JButton();
         btnMetodopago = new javax.swing.JButton();
         btnProgramarenvio = new javax.swing.JButton();
+        pnlContenido = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuInicio = new javax.swing.JMenu();
         MenuSobre = new javax.swing.JMenu();
@@ -166,6 +203,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel1.setText("Gestionar envios");
 
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClienteActionPerformed(evt);
+            }
+        });
+
+        btnMetodopago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMetodopagoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -196,6 +245,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(128, Short.MAX_VALUE))
         );
 
+        pnlContenido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout pnlContenidoLayout = new javax.swing.GroupLayout(pnlContenido);
+        pnlContenido.setLayout(pnlContenidoLayout);
+        pnlContenidoLayout.setHorizontalGroup(
+            pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 534, Short.MAX_VALUE)
+        );
+        pnlContenidoLayout.setVerticalGroup(
+            pnlContenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         MenuInicio.setText("Inicio");
         jMenuBar1.add(MenuInicio);
 
@@ -224,8 +286,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(537, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(pnlContenido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,7 +298,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlContenido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -244,10 +311,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnMetodopagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMetodopagoActionPerformed
+        cargarPanel(new VentanaMetodoPago());
+    }//GEN-LAST:event_btnMetodopagoActionPerformed
+
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        cargarPanel(new VentanaDatosCliente());
+    }//GEN-LAST:event_btnClienteActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -266,7 +342,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new VentanaPrincipal().setVisible(true));
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VentanaPrincipal().setVisible(true);
+                }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -286,5 +366,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JPanel pnlContenido;
     // End of variables declaration//GEN-END:variables
 }
