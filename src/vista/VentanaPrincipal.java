@@ -121,7 +121,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //Se  configura la ventana principal para permitir navegar con los paneles
         setLocationRelativeTo(null);
          setDefaultCloseOperation(EXIT_ON_CLOSE);
-         setTitle("Sistema de Gestión de Biblioteca");
+         setTitle("Sistema de Carpinteria el Tablon");
          setSize(1000, 700);
         // cargar panel de libros por defecto
         cargarPanel(new VentanaDatosCliente());

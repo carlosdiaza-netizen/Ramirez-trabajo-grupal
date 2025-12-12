@@ -165,7 +165,7 @@ public class VentanaMetodoPago extends javax.swing.JPanel {
         fechaPago
     };
     
-    model.addRow(nuevaFila);
+    model.insertRow(0, nuevaFila);
     
     
     limpiarCampos();
