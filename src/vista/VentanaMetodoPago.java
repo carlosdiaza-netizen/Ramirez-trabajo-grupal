@@ -1,9 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package vista;
-import java.awt.Dimension;
+
+import javax.swing.table.DefaultTableModel;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Carlos DEFINITIVO
@@ -15,7 +15,39 @@ public class VentanaMetodoPago extends javax.swing.JPanel {
      */
     public VentanaMetodoPago() {
         initComponents();
+        configurarEncabezadosTabla();
+        
+        
+        
+        
     }
+    
+    private void configurarEncabezadosTabla() {
+        // 1. Verificar si la tabla existe y obtener su modelo
+        if (tbl_pagoenvio != null) {
+            try {
+                // El método para obtener el modelo es el mismo
+                DefaultTableModel model = (DefaultTableModel) tbl_pagoenvio.getModel();
+
+                // 2. Definir los nuevos títulos (Asegúrate de que coincida con el número de columnas)
+                String[] misTitulos = {"Nº Boleta/Factura", "Medio de Pago", "Monto Cancelado", "Fecha de pago"};
+                
+                // 3. Establecer los nuevos títulos
+                model.setColumnIdentifiers(misTitulos);
+                
+                System.out.println("Encabezados de tabla actualizados.");
+
+            } catch (ClassCastException e) {
+                System.err.println("Error: El modelo de la tabla no es DefaultTableModel. " + e.getMessage());
+            } catch (Exception e) {
+                 System.err.println("Error general al configurar tabla: " + e.getMessage());
+            }
+        } else {
+            System.err.println("Error: El componente tbl_pagoenvio es nulo.");
+        }
+    }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,12 +62,14 @@ public class VentanaMetodoPago extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txt_contadoacancelar = new javax.swing.JTextField();
+        txt_montocancelado = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        cb_contadoefectivo = new javax.swing.JComboBox<>();
+        cb_mediopago = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_numeropago = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbl_pagoenvio = new javax.swing.JTable();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -52,11 +86,16 @@ public class VentanaMetodoPago extends javax.swing.JPanel {
 
         jLabel6.setText("Medios de pago");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
-        add(txt_contadoacancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 90, -1));
+        add(txt_montocancelado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 150, 90, -1));
 
         jButton1.setBackground(new java.awt.Color(102, 255, 102));
         jButton1.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         jButton1.setText("Registar pago");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 170, 40));
 
         jButton3.setBackground(new java.awt.Color(255, 102, 102));
@@ -64,19 +103,93 @@ public class VentanaMetodoPago extends javax.swing.JPanel {
         jButton3.setText("Limpiar");
         add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 150, 40));
 
-        cb_contadoefectivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
-        cb_contadoefectivo.setSelectedIndex(-1);
-        add(cb_contadoefectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 90, -1));
+        cb_mediopago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta" }));
+        cb_mediopago.setSelectedIndex(-1);
+        add(cb_mediopago, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 90, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel10.setText("Numero de boleta/factura:");
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 120, -1));
+        add(txt_numeropago, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 120, -1));
+
+        tbl_pagoenvio.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tbl_pagoenvio);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 570, 90));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      agregarFilaPago();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void agregarFilaPago(){
+    DefaultTableModel model = (DefaultTableModel) tbl_pagoenvio.getModel();
+    
+    String boletaFactura = txt_numeropago.getText().trim();
+    String monto = txt_montocancelado.getText().trim();
+    
+    String medioPago = "";
+    if (cb_mediopago.getSelectedItem() != null) {
+        medioPago = cb_mediopago.getSelectedItem().toString();
+    }
+    
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyy");
+    String fechaPago = LocalDateTime.now().format(dtf);
+    
+    
+    
+    
+    if (boletaFactura.isEmpty() || monto.isEmpty() || medioPago.isEmpty()){
+        JOptionPane.showMessageDialog(this,
+                "Debe ingresar el Nº de Boleta/Factura, el mMedio de pago y el Monto",
+                "Datos Faltantes",
+                JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    
+    Object[] nuevaFila = new Object[] {
+        boletaFactura,
+        medioPago,
+        monto,
+        fechaPago
+    };
+    
+    model.addRow(nuevaFila);
+    
+    
+    limpiarCampos();
+    
+    
+    }
+    
+    
+    private void limpiarCampos(){
+        
+        
+        txt_numeropago.setText("");
+        
+        txt_montocancelado.setText("");
+        cb_mediopago.setSelectedIndex(-1);
+    }
+    
+    
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cb_contadoefectivo;
+    private javax.swing.JComboBox<String> cb_mediopago;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -84,7 +197,9 @@ public class VentanaMetodoPago extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField txt_contadoacancelar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbl_pagoenvio;
+    private javax.swing.JTextField txt_montocancelado;
+    private javax.swing.JTextField txt_numeropago;
     // End of variables declaration//GEN-END:variables
 }
